@@ -25,6 +25,7 @@ jobs:
 
           script: |
             set -e
+            export PATH="$HOME/.bun/bin:$PATH"
 
             echo "======================================"
             echo "Début du déploiement"
@@ -33,13 +34,13 @@ jobs:
             cd /var/www/clients-astrojs
 
             echo "Mise à jour du code..."
-            git pull origin
+            git pull origin main
             
             echo "Installation des dépendances..."
-            /home/etudiant/.bun/bin/bun ci
+            bun ci
 
             echo "Compilation Astro..."
-            /home/etudiant/.bun/bin/bun run --bun build
+            bun run --bun build
 
             echo "Redémarrage de l'application..."
             sudo systemctl restart exam
